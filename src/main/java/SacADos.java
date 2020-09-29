@@ -32,11 +32,33 @@ public class SacADos {
 
     /**
      * Obtenir le poids en cours du sac
+     * @return poids total
      */
     public int getTotalWeight() {
         int total_weight = 0;
         for (Objet object : objects) total_weight += object.getWeight();
         return total_weight;
+    }
+
+    /**
+     * Obtenir la valeur en cours des objets du sac
+     * @return valeur total
+     */
+    public int getTotalValue() {
+        int total_value = 0;
+        for (Objet object : objects) total_value += object.getValue();
+        return total_value;
+    }
+
+    @Override
+    public String toString() {
+        String string = "Sac à dos (capacité maximale " + max_weight + "):" +
+            "\n-> poids total:  " + getTotalWeight() +
+            "\n-> valeur total: " + getTotalValue() +
+            "\n-> objets contenus: ";
+        for (Objet object : objects)
+            string = string.concat(object.getIndex()+" ");
+        return string;
     }
 
     /*** GETTERS & SETTERS ***/
