@@ -10,12 +10,12 @@ public class Objet implements Comparable<Objet> {
     /**
      * Poids
      */
-    private int weight;
+    private double weight;
 
     /**
      * Valeur
      */
-    private int value;
+    private double value;
 
     /**
      * Ratio valeur/poids
@@ -47,17 +47,9 @@ public class Objet implements Comparable<Objet> {
 
     public int getIndex() { return index; }
 
-    public void setIndex(int index) { this.index = index; }
+    public double getWeight() { return weight; }
 
-    public int getWeight() { return weight; }
-
-    public void setWeight(int weight) { this.weight = weight; }
-
-    public int getValue() { return value; }
-
-    public void setValue(int value) { this.value = value; }
-
-    public double getRatio() { return ratio; }
+    public double getValue() { return value; }
 
     public void setRatio(double ratio) { this.ratio = ratio; }
 }
