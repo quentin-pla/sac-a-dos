@@ -1,33 +1,36 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Sac à dos
  */
 public class SacADos {
     /**
-     * Poids maximum
+     * Contenu du sac
      */
-    private int max_weight;
-
-    /**
-     * Objets dans le sac
-     */
-    private ArrayList<Objet> objects;
+    private boolean[] content;
 
     /**
      * Constructeur
-     * @param max_weight poids maximum
      */
-    public SacADos(int max_weight) {
-        this.max_weight = max_weight;
-        this.objects = new ArrayList<>();
+    public SacADos() {
+        this.content = new boolean[ProblemeSacADos.objects_count];
+        Arrays.fill(content, false);
+    }
+
+    /**
+     * Constructeur surchargé
+     */
+    public SacADos(boolean[] content) {
+        this.content = content;
     }
 
     /**
      * Ajouter un objet dans le sac
      */
-    public void addObject(Objet object) {
-        if ((getTotalWeight() + object.getWeight()) <= max_weight) objects.add(object);
+    public void addObject(int index) {
+        double new_weight = getTotalWeight() + ProblemeSacADos.getObject(index).getWeight();
+        content[index] = new_weight <= ProblemeSacADos.max_weight;
     }
 
     /**
@@ -36,7 +39,8 @@ public class SacADos {
      */
     public int getTotalWeight() {
         int total_weight = 0;
-        for (Objet object : objects) total_weight += object.getWeight();
+        for (int i = 0; i < content.length; i++)
+            if (content[i]) total_weight += ProblemeSacADos.getObject(i).getWeight();
         return total_weight;
     }
 
@@ -46,24 +50,31 @@ public class SacADos {
      */
     public int getTotalValue() {
         int total_value = 0;
-        for (Objet object : objects) total_value += object.getValue();
+        for (int i = 0; i < content.length; i++)
+            if (content[i]) total_value += ProblemeSacADos.getObject(i).getValue();
         return total_value;
+    }
+
+    /**
+     * Obtenir l'index des objets contenus dans le sac
+     * @return index des objets contenus
+     */
+    public ArrayList<Integer> getObjectsContent() {
+        ArrayList<Integer> objects_indexes = new ArrayList<>();
+        for (int i = 0; i < content.length; i++)
+            if (content[i]) objects_indexes.add(ProblemeSacADos.getObject(i).getIndex());
+        return objects_indexes;
     }
 
     @Override
     public String toString() {
-        String string = "Sac à dos (capacité maximale " + max_weight + "):" +
+        return "Sac à dos (capacité maximale " + ProblemeSacADos.max_weight + "):" +
             "\n-> poids total:  " + getTotalWeight() +
             "\n-> valeur total: " + getTotalValue() +
-            "\n-> objets contenus: ";
-        for (Objet object : objects)
-            string = string.concat(object.getIndex()+" ");
-        return string;
+            "\n-> objets contenus: " + getObjectsContent();
     }
 
     /*** GETTERS & SETTERS ***/
 
-    public ArrayList<Objet> getObjects() {
-        return objects;
-    }
+    public boolean[] getContent() { return content; }
 }
