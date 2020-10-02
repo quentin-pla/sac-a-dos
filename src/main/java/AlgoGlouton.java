@@ -6,22 +6,14 @@ import java.util.Collections;
  */
 public class AlgoGlouton {
     /**
-     * Liste des objets triés selon ratio
+     * Exécution de l'algorithme glouton
      */
-    public static ArrayList<Objet> orderedObjectList;
-
-    /**
-     * Exécution de l'algorithme
-     */
-    public static SacADos run() {
-        orderedObjectList = new ArrayList<>();
-        for(Objet object : ProblemeSacADos.available_objects) {
-            object.setRatio((double)object.getValue()/(double)object.getWeight());
-            orderedObjectList.add(object);
-        }
-        Collections.sort(orderedObjectList);
-        SacADos bag = new SacADos(ProblemeSacADos.max_weight);
-        for (Objet object : orderedObjectList) bag.addObject(object);
-        return bag;
+    public static NoeudBAB run() {
+        ArrayList<Objet> objects_list = new ArrayList<>(ProblemeSacADos.available_objects);
+        for (Objet object : objects_list) object.setRatio(object.getValue()*1.0/object.getWeight());
+        Collections.sort(objects_list);
+        NoeudBAB node = new NoeudBAB(0);
+        for (Objet object : objects_list) node.getBag().addObject(object.getIndex());
+        return node;
     }
 }
