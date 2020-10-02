@@ -17,7 +17,12 @@ public class ProblemeSacADos {
     /**
      * Poids maximum du sac à dos
      */
-    public static int max_weight;
+    public static double max_weight = 0;
+
+    /**
+     * Nombre d'objets
+     */
+    public static int objects_count = 0;
 
     /**
      * Exécution du programme
@@ -25,9 +30,8 @@ public class ProblemeSacADos {
      */
     public static void main(String[] args) {
         initProblem(0);
-        SacADos bag = AlgoGlouton.run();
-        for (Objet object : bag.getObjects())
-            System.out.println(object.getIndex() + " " + object.getRatio());
+        NoeudBAB node = AlgoGlouton.run();
+        System.out.println(node.getBag().toString());
     }
 
     /**
@@ -48,13 +52,14 @@ public class ProblemeSacADos {
                         String[] object_values = line.split(" ");
                         int weight = Integer.parseInt(object_values[0]);
                         int value = Integer.parseInt(object_values[1]);
-                        available_objects.add(new Objet(line_count,weight,value));
+                        available_objects.add(new Objet(line_count-2,weight,value));
                     }
                 }
                 reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            objects_count = available_objects.size();
         } else {
             try {
                 throw new Exception("Fichier introuvable.");
@@ -62,5 +67,14 @@ public class ProblemeSacADos {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Obtenir un objet depuis son index
+     * @param index index
+     * @return objet
+     */
+    public static Objet getObject(int index) {
+        return available_objects.get(index);
     }
 }
