@@ -1,5 +1,5 @@
 /**
- * Objet du sac
+ * Objet instance sac à dos
  */
 public class Objet implements Comparable<Objet> {
     /**

@@ -7,6 +7,7 @@ import java.util.Collections;
 public class AlgoGlouton {
     /**
      * Exécution de l'algorithme glouton
+     * permettant d'obtenir la borne inférieure
      */
     public static NoeudBAB run() {
         ArrayList<Objet> objects_list = new ArrayList<>(ProblemeSacADos.available_objects);

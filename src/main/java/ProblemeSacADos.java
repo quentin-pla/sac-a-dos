@@ -29,14 +29,20 @@ public class ProblemeSacADos {
      * @param args arguments
      */
     public static void main(String[] args) {
-        initProblem(0);
+        initProblem(1);
+        //Calcul borne supérieure
+        Relaxation.calculateSolution();
+        //Calcul borne inférieure
         NoeudBAB node = AlgoGlouton.run();
+        //Execution algorithme Branch And Bound
+        node = BranchAndBound.run(node);
+        //Affichage résultat optimal
         System.out.println(node.getBag().toString());
     }
 
     /**
-     * Initialiser le problème à partir d'un fichier texte
-     * @param number numéro du problème
+     * Initialiser le problème à partir d'une instance sac à dos
+     * @param number numéro de l'instance
      */
     public static void initProblem(int number) {
         InputStream file = ProblemeSacADos.class.getClassLoader().getResourceAsStream("sac" + number + ".txt");
