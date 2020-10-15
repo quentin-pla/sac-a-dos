@@ -47,7 +47,7 @@ public class BranchAndBound {
      * @param node noeud
      */
     private static boolean isValidSolution(NoeudBAB node) {
-        return node.getMaxValue() >= solution.getValue()
+        return node.getMax_value() >= solution.getValue()
             && node.getWeight() <= ProblemeSacADos.max_weight;
     }
 

@@ -8,9 +8,9 @@ public class NoeudBAB implements Comparable<NoeudBAB> {
     private SacADos bag;
 
     /**
-     * Valeur maximale relaxation
+     * Valeur maximale (optimum fractionnaire)
      */
-    private double maxValue = 0;
+    private double max_value = 0;
 
     /**
      * Index du noeud
@@ -33,7 +33,7 @@ public class NoeudBAB implements Comparable<NoeudBAB> {
     public NoeudBAB(NoeudBAB node) {
         this.bag = new SacADos(node.bag.getContent().clone());
         this.index = node.index;
-        this.maxValue = node.maxValue;
+        this.max_value = node.max_value;
     }
 
     /**
@@ -60,7 +60,8 @@ public class NoeudBAB implements Comparable<NoeudBAB> {
      * Mettre à jour la valeur maximale
      */
     private void updateMaxValue() {
-        maxValue = Relaxation.calculateMaxValue(bag.getContent(), index);
+        //maxValue = RelaxationFractionnaire.calculateMaxValue(bag.getContent(), index);
+        max_value = RelaxationFractionnaire.calculateMaxValue(this);
     }
 
     /**
@@ -70,7 +71,8 @@ public class NoeudBAB implements Comparable<NoeudBAB> {
      */
     @Override
     public int compareTo(NoeudBAB node) {
-        return Double.compare(maxValue, node.getMaxValue());
+        //return Double.compare(maxValue, node.getMaxValue());
+        return -1;
     }
 
     /*** GETTERS & SETTERS ***/
@@ -81,7 +83,7 @@ public class NoeudBAB implements Comparable<NoeudBAB> {
 
     public int getIndex() { return index; }
 
-    public double getMaxValue() { return maxValue; }
+    public double getMax_value() { return max_value; }
 
     public SacADos getBag() { return bag; }
 }

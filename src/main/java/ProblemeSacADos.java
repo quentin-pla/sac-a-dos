@@ -29,14 +29,14 @@ public class ProblemeSacADos {
      * @param args arguments
      */
     public static void main(String[] args) {
-        initProblem(1);
-        //Calcul borne supérieure
-        Relaxation.calculateSolution();
+        initProblem(0);
         //Calcul borne inférieure
         NoeudBAB node = AlgoGlouton.run();
+        //Initialisation relaxation fractionnaire
+        RelaxationFractionnaire.init();
         //Execution algorithme Branch And Bound
         node = BranchAndBound.run(node);
-        //Affichage résultat optimal
+        //Affichage meilleure solution
         System.out.println(node.getBag().toString());
     }
 

@@ -28,9 +28,10 @@ public class SacADos {
     /**
      * Ajouter un objet dans le sac
      */
-    public void addObject(int index) {
+    public boolean addObject(int index) {
         double new_weight = getTotalWeight() + ProblemeSacADos.getObject(index).getWeight();
         content[index] = new_weight <= ProblemeSacADos.max_weight;
+        return content[index];
     }
 
     /**

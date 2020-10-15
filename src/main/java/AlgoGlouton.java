@@ -14,7 +14,8 @@ public class AlgoGlouton {
         for (Objet object : objects_list) object.setRatio(object.getValue()*1.0/object.getWeight());
         Collections.sort(objects_list);
         NoeudBAB node = new NoeudBAB(0);
-        for (Objet object : objects_list) node.getBag().addObject(object.getIndex());
+        for (Objet object : objects_list)
+            if (!node.getBag().addObject(object.getIndex())) break;
         return node;
     }
 }
